@@ -1,24 +1,11 @@
 # wsclient
 
+This is an example of websocket, includes two parts; server(node.js and express) and client(vue.js).
 ## Project setup
 ```
-yarn install
-```
+cd  wsserver
+npm start
 
-### Compiles and hot-reloads for development
-```
+cd wsclient
 yarn serve
 ```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
