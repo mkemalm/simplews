@@ -7,7 +7,11 @@ const wss = new WebSocket.Server({ server: server });
 
 let executeCommand = (command,callback) => {
   const { spawn } = require("child_process");
-  const executedCommand = spawn(command, []);
+  let params = command.split(" ");
+  command_part = params[0];
+  params.shift();
+  console.log(params);
+  const executedCommand = spawn(command_part, params);
   let output = "";
 
   executedCommand.stdout.on("data", data => {
