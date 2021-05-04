@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <h2>Vue.js WebSocket Tutorial</h2> 
-    <button v-on:click="sendMessage('hello')">Send Message</button>
+    <input v-model="message" placeholder="Type command here"/>
+    <button v-on:click="sendMessage()">Send Message</button><br><br>
+    <span v-text="result"></span>
   </div>
 </template>
 
@@ -12,40 +14,45 @@ export default {
   
   data: function () {
     return {
-      connection:null
+      connection:null,
+      message:"",
+      result:null
     }
   },
 
   methods: {
-    sendMessage: function(message) {
-      console.log("Hello")
+    sendMessage: function() {
+      console.log("Sent command:" + this.message);
       console.log(this.connection);
-      this.connection.send(message);
+      this.connection.send(this.message);
     },
   },
 
   created: function() {
-    console.log("Starting connection to WebSocket Server")
-    this.connection = new WebSocket("ws://localhost:3000")
+    
+    console.log("Starting connection to WebSocket Server");
+    this.connection = new WebSocket("ws://localhost:3000");
+    this.result = "Result of command";
 
-    this.connection.onmessage = function(event) {
+    this.connection.onmessage = (event) => {
       console.log(event);
     }
 
-    this.connection.onopen = function(event) {
-      console.log(event)
-      console.log("Successfully connected to the echo websocket server...")
-    }
-
-    this.connection.onmessage = function(event) {
+    this.connection.onopen = (event) => {
       console.log(event);
-    }
-
-    this.connection.onopen = function(event) {
-      console.log(event)
       console.log("Successfully connected to the echo websocket server...")
     }
 
+    this.connection.onmessage = (event) => {
+      console.log("Resultttt:" + event.data);
+      this.result = event.data;
+    }
+
+    this.connection.onopen = (event) => {
+      console.log(event);
+      console.log("Successfully connected to the echo websocket server...");
+    }
+    
   }
 }
 </script>
