@@ -7,5 +7,6 @@ cd  wsserver
 npm start
 
 cd wsclient
+sudo npm install
 yarn serve
 ```
